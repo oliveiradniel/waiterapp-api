@@ -1,5 +1,7 @@
-let text: string;
+import express from 'express';
 
-text = 'Hello World';
+const app = express();
 
-console.log(text);
+app.listen(3001, () => {
+  console.log('🚀 Server is running on http://localhost:3001');
+});
