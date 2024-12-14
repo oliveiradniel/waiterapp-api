@@ -5,7 +5,7 @@ import tseslint from "typescript-eslint";
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   { files: ["**/*.{js,ts}"] },
-  { ignores: ["**/node_modules", ".git", "dist"] },
+  { ignores: ["*/node_modules', '.gi'", "dist", "eslint.config.mjs"] },
   {
     rules: {
       semi: ["error", "always"], // requires the semicolon
