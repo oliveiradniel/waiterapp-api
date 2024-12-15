@@ -4,8 +4,7 @@ import path from 'node:path';
 
 import multer from 'multer';
 
-import { listCategories } from './app/useCases/categories/listCategories';
-import { createCategory } from './app/useCases/categories/createCategory';
+import Category from './app/useCases/Category';
 
 import { listProducts } from './app/useCases/products/listProducts';
 import { createProduct } from './app/useCases/products/createProduct';
@@ -24,10 +23,10 @@ const upload = multer({
 });
 
 // List categories
-router.get('/categories', listCategories);
+router.get('/categories', Category.index);
 
 // Create category
-router.post('/categories', createCategory);
+router.post('/categories', Category.create);
 
 // List products
 router.get('/products', listProducts);
