@@ -26,16 +26,14 @@ router.get('/categories', Category.index);
 // Create category
 router.post('/categories', Category.create);
 
+// Get products by category
+router.get('/categories/:categoryId/products', Category.listProductsByCategory);
 // List products
+
 router.get('/products', Product.index);
 
 // Create product
 router.post('/products', upload.single('image'), Product.create);
-
-// Get products by category
-router.get('/categories/:categoryId/products', (req, res) => {
-  res.send('OK');
-});
 
 // List orders
 router.get('/orders', (req, res) => {

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { Category as Model } from '../models/Category';
+import { Product } from '../models/Product';
 
 class Category {
   async index(req: Request, res: Response) {
@@ -28,6 +29,19 @@ class Category {
       const category = await Model.create({ name, icon });
 
       res.status(201).json(category);
+    } catch {
+      res.sendStatus(500);
+    }
+  }
+
+  async listProductsByCategory(req: Request, res: Response) {
+    try {
+      const { categoryId } = req.params;
+
+      // const products = await Product.find({ category: categoryId });
+      const products = await Product.find().where('category').equals(categoryId);
+
+      res.json(products);
     } catch {
       res.sendStatus(500);
     }
