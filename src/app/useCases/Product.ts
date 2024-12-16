@@ -48,7 +48,7 @@ class Product {
         description,
         imagePath: filename,
         price: Number(price),
-        ingredients: JSON.parse(ingredients),
+        ingredients: ingredients ? JSON.parse(ingredients) : [],
         category,
       });
 
