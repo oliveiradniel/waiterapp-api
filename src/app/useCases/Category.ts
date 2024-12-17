@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import { Category as Model } from '../models/Category';
 import { Product } from '../models/Product';
+import { isValidObjectId } from 'mongoose';
 
 class Category {
   async index(req: Request, res: Response) {
@@ -37,6 +38,10 @@ class Category {
   async listProductsByCategory(req: Request, res: Response) {
     try {
       const { categoryId } = req.params;
+
+      if (!(isValidObjectId(categoryId))) {
+        res.status(400).json({ error: 'Invalid category id!' });
+      }
 
       // const products = await Product.find({ category: categoryId });
       const products = await Product.find().where('category').equals(categoryId);
