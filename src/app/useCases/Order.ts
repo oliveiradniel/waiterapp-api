@@ -5,7 +5,7 @@ import { Order as Model } from '../models/Order';
 class Order {
   async index(req: Request, res: Response) {
     try {
-      const orders = await Model.find().populate('products.product');
+      const orders = await Model.find().populate('products.product').sort({ createdAt: 1 });
 
       res.json(orders);
     } catch {
