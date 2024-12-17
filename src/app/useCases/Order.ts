@@ -71,10 +71,6 @@ class Order {
         res.status(400).json({ error: 'Invalid order id!' });
       }
 
-      if (!orderId) {
-        res.status(400).json({ error: 'OrderID is required!' });
-      }
-
       await Model.findByIdAndDelete(orderId);
 
       res.sendStatus(204);
