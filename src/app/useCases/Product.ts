@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 
+import { isValidObjectId } from 'mongoose';
+
 import { Product as Model } from '../models/Product';
 
 class Product {
@@ -53,6 +55,22 @@ class Product {
       });
 
       res.status(201).json(product);
+    } catch {
+      res.sendStatus(500);
+    }
+  }
+
+  async delete(req: Request, res: Response) {
+    try {
+      const { productId } = req.params;
+
+      if (!(isValidObjectId(productId))) {
+        res.status(400).json({ error: 'Invalid product id!' });
+      }
+
+      await Model.findByIdAndDelete(productId);
+
+      res.sendStatus(204);
     } catch {
       res.sendStatus(500);
     }

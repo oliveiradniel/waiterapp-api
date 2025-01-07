@@ -35,6 +35,19 @@ class Category {
     }
   }
 
+  async update(req: Request, res: Response) {
+    try {
+      const { name } = req.body;
+      const { id } = req.params;
+
+      await Model.findByIdAndUpdate(id, { $set: { name } });
+
+      res.status(204);
+    } catch {
+      res.sendStatus(500);
+    }
+  }
+
   async listProductsByCategory(req: Request, res: Response) {
     try {
       const { categoryId } = req.params;
