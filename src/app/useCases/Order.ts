@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 
+import { isValidObjectId } from 'mongoose';
+
 import { Order as Model } from '../models/Order';
 
 class Order {
@@ -49,8 +51,8 @@ class Order {
         res.status(400).json({ error: 'Status should be one of these: WAITING, IN_PRODUCTION or DONE!' });
       }
 
-      if (!orderId) {
-        res.status(400).json({ error: 'OrderID is required' });
+      if (!(isValidObjectId(orderId))) {
+        res.status(400).json({ error: 'Invalid order id!' });
       }
 
       await Model.findByIdAndUpdate(orderId, { $set: { status } });
@@ -65,8 +67,8 @@ class Order {
     try {
       const { orderId } = req.params;
 
-      if (!orderId) {
-        res.status(400).json({ error: 'OrderID is required!' });
+      if (!(isValidObjectId(orderId))) {
+        res.status(400).json({ error: 'Invalid order id!' });
       }
 
       await Model.findByIdAndDelete(orderId);

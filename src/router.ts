@@ -23,6 +23,8 @@ router.get('/products', Product.index);
 // Create product
 router.post('/products', upload.single('image'), Product.create);
 
+router.delete('/products/:productId', Product.delete);
+
 // List orders
 router.get('/orders', Order.index);
 
