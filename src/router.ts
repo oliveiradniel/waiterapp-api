@@ -16,8 +16,8 @@ router.post('/categories', Category.create);
 
 // Get products by category
 router.get('/categories/:categoryId/products', Category.listProductsByCategory);
-// List products
 
+// List products
 router.get('/products', Product.index);
 
 // Create product
